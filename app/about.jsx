@@ -4,8 +4,8 @@ import { Link } from "expo-router";
 
 const About = () => {
   return (
-    <View className="flex-1 items-center justify-center">
-      <Text className="bold font-bold mb-10 text-2xl">
+    <View className="items-center justify-center flex-1">
+      <Text className="mb-10 text-2xl font-bold bold">
         This is the About Page
       </Text>
 

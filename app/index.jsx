@@ -5,9 +5,9 @@ import "../global.css";
 
 const Home = () => {
   return (
-    <View className="flex-1 items-center justify-center">
-      <Text className="text-red-600 mb-10 text-2xl">Home</Text>
-      <View className="flex-row gap-5">
+    <View className="items-center justify-center flex-1">
+      <Text className="mb-10 text-2xl text-red-600">Home</Text>
+      <View className="flex-row items-center gap-5">
         <Link href="/about" className="underline">
           About Page
         </Link>

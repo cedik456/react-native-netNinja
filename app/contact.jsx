@@ -4,7 +4,7 @@ import { Link } from "expo-router";
 
 const Contact = () => {
   return (
-    <View className="flex-1 justify-center items-center">
+    <View className="items-center justify-center flex-1">
       <Text className="text-2xl">This is the contact page</Text>
       <Link href="/" className="font-bold underline">
         Go back
