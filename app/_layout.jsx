@@ -8,7 +8,7 @@ const RootLayout = () => {
   const colorScheme = useColorScheme();
 
   return (
-    <View className={colorScheme === "dark" ? "dark flex-1" : "flex-1"}>
+    <View className="flex-1">
       <StatusBar value="auto" />
       <Stack
         screenOptions={{
@@ -19,6 +19,7 @@ const RootLayout = () => {
         }}
       >
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ title: "Home" }} />
       </Stack>
     </View>
