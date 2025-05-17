@@ -8,7 +8,7 @@ const RootLayout = () => {
   const colorScheme = useColorScheme();
 
   return (
-    <View className="flex-1">
+    <View className={colorScheme === "dark" ? "dark flex-1" : "flex-1"}>
       <StatusBar value="auto" />
       <Stack
         screenOptions={{

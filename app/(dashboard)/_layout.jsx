@@ -1,11 +1,7 @@
 import React from "react";
-
-import { styled } from "nativewind";
 import { useColorScheme } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, Feather, Fon } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
-
-const StyledIonicons = styled(Ionicons);
 
 const DashboardLayout = () => {
   const colorScheme = useColorScheme();
@@ -25,16 +21,41 @@ const DashboardLayout = () => {
         options={{
           title: "Profile",
           tabBarIcon: ({ focused }) => (
-            <StyledIonicons
+            <Ionicons
               name={focused ? "person" : "person-outline"}
               size={24}
               className="text-white"
+              color="white"
             />
           ),
         }}
       />
-      <Tabs.Screen name="books" options={{ title: "Books" }} />
-      <Tabs.Screen name="create" options={{ title: "Create" }} />
+      <Tabs.Screen
+        name="books"
+        options={{
+          title: "Books",
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? "book" : "book-outline"}
+              size={24}
+              color="white"
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="create"
+        options={{
+          title: "Create",
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name={focused ? "create" : "create-outline"}
+              size={24}
+              color="white"
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 };
