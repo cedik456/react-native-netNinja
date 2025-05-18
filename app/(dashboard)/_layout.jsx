@@ -2,6 +2,7 @@ import React from "react";
 import { useColorScheme } from "react-native";
 import { Ionicons, Feather, Fon } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const DashboardLayout = () => {
   const colorScheme = useColorScheme();
@@ -10,9 +11,9 @@ const DashboardLayout = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: colorScheme === "dark" ? "#171717" : "#e8e7ef",
+          backgroundColor: colorScheme === "dark" ? "#e8e7ef" : "#171717",
         },
-        tabBarActiveTintColor: colorScheme === "dark" ? "#fff" : "#201e2b",
+        tabBarActiveTintColor: colorScheme === "dark" ? "#201e2b" : "#fff",
         tabBarInactiveTintColor: colorScheme === "dark" ? "#888" : "#666",
       }}
     >

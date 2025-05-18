@@ -3,26 +3,30 @@ import React from "react";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "../global.css";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const RootLayout = () => {
   const colorScheme = useColorScheme();
 
   return (
-    <View className={colorScheme === "dark" ? "dark flex-1" : "flex-1"}>
-      <StatusBar value="auto" />
+    <SafeAreaView
+      className={colorScheme === "dark" ? "dark flex-1" : "flex-1"}
+      edges={["top", "left", "right"]}
+    >
+      <StatusBar style="auto" />
       <Stack
         screenOptions={{
-          headerStyle: {
-            backgroundColor: colorScheme === "dark" ? "#171717" : "#e8e7ef",
+          headerShown: false,
+          contentStyle: {
+            backgroundColor: colorScheme === "dark" ? "black" : "white",
           },
-          headerTintColor: colorScheme === "dark" ? "#fff" : "#201e2b",
         }}
       >
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ title: "Home" }} />
       </Stack>
-    </View>
+    </SafeAreaView>
   );
 };
 
