@@ -14,7 +14,7 @@ app.use(express.json());
 const userRoutes = require("./routes/sampleRoutes");
 
 // routeUsage
-app.use("/users", userRoutes);
+app.use("/api/users", userRoutes);
 
 // connection
 mongoose
