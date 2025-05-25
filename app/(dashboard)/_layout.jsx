@@ -2,7 +2,6 @@ import React from "react";
 import { useColorScheme } from "react-native";
 import { Ionicons, Feather, Fon } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const DashboardLayout = () => {
   const colorScheme = useColorScheme();
