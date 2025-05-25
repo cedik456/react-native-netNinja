@@ -20,10 +20,12 @@ const Login = () => {
 
   const handleSubmit = async () => {
     try {
-      await login(email, password);
-      router.push("/(dashboard)/profile");
+      const result = await login(email, password);
+      if (result.success) {
+        router.replace("/(dashboard)/profile");
+      }
     } catch (error) {
-      console.log("Error logging in:", error);
+      console.log("Error logging in:", error.message);
     }
   };
 

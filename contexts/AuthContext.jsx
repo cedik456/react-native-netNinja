@@ -13,9 +13,11 @@ export function AuthProvider({ children }) {
         { email, password }
       );
 
-      const data = response.data;
-      setUser({ email, token: data.token });
-      console.log("Login Successfully");
+      const token = response.data;
+
+      setUser({ email, token });
+
+      return { success: true };
     } catch (error) {
       if (error.response) {
         console.error("Login Failed: ", error.response.data.message);
@@ -40,7 +42,7 @@ export function AuthProvider({ children }) {
 
       const data = response.data;
       setUser({ email, token: data.token });
-      console.log("Registration Successfully");
+      return { success: true, data: response.data };
     } catch (error) {
       if (error.response) {
         console.error("Registration Failed: ", error.response.data.message);
