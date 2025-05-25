@@ -11,10 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-const userRoutes = require("./routes/sampleRoutes");
+
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 // routeUsage
-app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 // connection
 mongoose

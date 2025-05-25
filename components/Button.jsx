@@ -2,7 +2,7 @@ import { Text, Pressable } from "react-native";
 import React from "react";
 
 const Button = ({ onPress, className = "", children, disabled = false }) => {
-  const defaultStyle = "p-4 bg-black rounded";
+  const defaultStyle = "p-4 bg-black rounded-md";
   const disabledStyles = "bg-gray-300 text-gray-300";
 
   return (
@@ -13,7 +13,7 @@ const Button = ({ onPress, className = "", children, disabled = false }) => {
         disabled ? disabledStyles : ""
       } ${className}`}
     >
-      <Text className="text-white">{children}</Text>
+      <Text className="text-center text-white">{children}</Text>
     </Pressable>
   );
 };
