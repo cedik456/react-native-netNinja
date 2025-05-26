@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../lib/axiosInstance";
 import { createContext, useState } from "react";
 
 const AuthContext = createContext();
@@ -8,10 +8,7 @@ export function AuthProvider({ children }) {
 
   async function login(email, password) {
     try {
-      const response = await axios.post(
-        "http://192.168.1.3:3000/api/auth/login",
-        { email, password }
-      );
+      const response = await api.post("/auth/login", { email, password });
 
       const token = response.data;
 
@@ -40,8 +37,9 @@ export function AuthProvider({ children }) {
         }
       );
 
-      const data = response.data;
-      setUser({ email, token: data.token });
+      const token = response.data;
+
+      setUser({ email, token });
       return { success: true, data: response.data };
     } catch (error) {
       if (error.response) {
