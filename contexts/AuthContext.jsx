@@ -28,14 +28,11 @@ export function AuthProvider({ children }) {
 
   async function register(name, email, password) {
     try {
-      const response = await axios.post(
-        "http://192.168.1.3:3000/api/auth/register",
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const response = await api.post("/auth/register", {
+        name,
+        email,
+        password,
+      });
 
       const token = response.data;
 
