@@ -1,5 +1,6 @@
-import api from "../lib/axiosInstance";
+import api from "../utils/axiosInstance";
 import { createContext, useState } from "react";
+import { showError } from "../utils/error";
 
 const AuthContext = createContext();
 
@@ -17,11 +18,11 @@ export function AuthProvider({ children }) {
       return { success: true };
     } catch (error) {
       if (error.response) {
-        console.error("Login Failed: ", error.response.data.message);
+        showError("Login Failed: ", error.response.data.message);
       } else if (error.request) {
-        console.error("No response from server", error.request);
+        showError("No response from server", error.request);
       } else {
-        console.log("Error: ", error.message);
+        showError("Error: ", error.message);
       }
     }
   }
@@ -40,11 +41,11 @@ export function AuthProvider({ children }) {
       return { success: true, data: response.data };
     } catch (error) {
       if (error.response) {
-        console.error("Registration Failed: ", error.response.data.message);
+        showError("Registration Failed: ", error.response.data.message);
       } else if (error.request) {
-        console.error("No response from server", error.request);
+        showError("No response from server", error.request);
       } else {
-        console.log("Error: ", error.message);
+        showError("Error: ", error.message);
       }
     }
   }
