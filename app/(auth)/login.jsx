@@ -10,6 +10,7 @@ import { Link, useRouter } from "expo-router";
 import Button from "../../components/Button";
 import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { showError } from "../../utils/error";
 
 const Login = () => {
   const { login } = useAuth();
@@ -19,13 +20,24 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async () => {
-    try {
-      const result = await login(email, password);
-      if (result.success) {
-        router.replace("/(dashboard)/profile");
-      }
-    } catch (error) {
-      console.log("Error logging in:", error.message);
+    if (!email || !password) {
+      showError("Email and password are required.");
+      return;
+    }
+
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      showError("Please enter a valid email address.");
+      return;
+    }
+
+    const result = await login(email, password);
+    console.log("Login Result:", result);
+
+    if (result.success) {
+      router.replace("/(dashboard)/profile");
+    } else {
+      showError("Login failed", result.message);
     }
   };
 

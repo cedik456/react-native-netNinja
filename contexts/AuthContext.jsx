@@ -17,13 +17,13 @@ export function AuthProvider({ children }) {
 
       return { success: true };
     } catch (error) {
-      if (error.response) {
-        showError("Login Failed: ", error.response.data.message);
-      } else if (error.request) {
-        showError("No response from server", error.request);
-      } else {
-        showError("Error: ", error.message);
-      }
+      const errorMessage =
+        error.response?.data.error || "An unexpected error occurred.";
+      showError("Login Failed", errorMessage);
+      return {
+        success: false,
+        message: errorMessage,
+      };
     }
   }
 
@@ -40,17 +40,16 @@ export function AuthProvider({ children }) {
       setUser({ email, token });
       return { success: true, data: response.data };
     } catch (error) {
-      if (error.response) {
-        showError("Registration Failed: ", error.response.data.message);
-      } else if (error.request) {
-        showError("No response from server", error.request);
-      } else {
-        showError("Error: ", error.message);
-      }
+      const errorMessage =
+        error.response?.data.message || "An unexpected error occurred.";
+      showError("Registration Failed", errorMessage);
+      return { success: false, message: errorMessage };
     }
   }
 
-  async function logout() {}
+  async function logout() {
+    setUser(null);
+  }
 
   return (
     <AuthContext.Provider value={{ user, login, register, logout }}>
