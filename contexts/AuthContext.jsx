@@ -1,6 +1,7 @@
 import api from "../utils/axiosInstance";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { showError } from "../utils/error";
+import { getToken, removeToken, saveToken } from "../utils/storage";
 
 const AuthContext = createContext();
 
@@ -12,6 +13,8 @@ export function AuthProvider({ children }) {
       const response = await api.post("/auth/login", { email, password });
 
       const token = response.data;
+
+      await saveToken(token);
 
       setUser({ email, token });
 
@@ -46,6 +49,8 @@ export function AuthProvider({ children }) {
 
       const token = response.data;
 
+      await saveToken(token);
+
       setUser({ email, token });
       return { success: true, data: response.data };
     } catch (error) {
@@ -70,8 +75,19 @@ export function AuthProvider({ children }) {
   }
 
   async function logout() {
+    await removeToken();
     setUser(null);
   }
+
+  useEffect(() => {
+    const bootstrap = async () => {
+      const token = await getToken();
+      if (token) {
+        setUser({ token });
+      }
+    };
+    bootstrap();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, login, register, logout }}>
