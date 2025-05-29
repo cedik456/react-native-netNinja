@@ -1,13 +1,13 @@
 import * as SecureStore from "expo-secure-store";
 
 export async function saveToken(token) {
-  await SecureStore.setItemAsync("userToken", token);
+  return await SecureStore.setItemAsync("userToken", token);
 }
 
 export async function getToken() {
-  await SecureStore.getItemAsync("userToken");
+  return await SecureStore.getItemAsync("userToken");
 }
 
 export async function removeToken() {
-  await SecureStore.deleteItemAsync("userToken");
+  return await SecureStore.deleteItemAsync("userToken");
 }

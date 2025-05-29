@@ -12,7 +12,9 @@ export function AuthProvider({ children }) {
     try {
       const response = await api.post("/auth/login", { email, password });
 
-      const token = response.data;
+      const token = response.data.token;
+
+      console.log(token);
 
       await saveToken(token);
 
@@ -47,7 +49,7 @@ export function AuthProvider({ children }) {
         password,
       });
 
-      const token = response.data;
+      const token = response.data.token;
 
       await saveToken(token);
 
