@@ -34,6 +34,7 @@ exports.register = async (req, res) => {
       .status(201)
       .json({ success: true, message: "User registered successfully" });
   } catch (error) {
+    console.error("Auth error:", error);
     res.status(500).json({
       success: false,
       message: "Something went wrong during registration.",
@@ -73,6 +74,7 @@ exports.login = async (req, res) => {
 
     res.status(200).json({ success: true, message: "Login successful", token });
   } catch (error) {
+    console.error("Auth error:", error);
     res.status(500).json({
       success: false,
       message: "Something went wrong during login.",

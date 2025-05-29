@@ -17,12 +17,21 @@ export function AuthProvider({ children }) {
 
       return { success: true };
     } catch (error) {
-      const errorMessage =
-        error.response?.data.error || "An unexpected error occurred.";
-      showError("Login Failed", errorMessage);
+      if (error.response) {
+        showError(
+          "Login Failed",
+          error.response.data.message || "Server error"
+        );
+        return { success: false, message: error.response.data.message };
+      }
+
+      showError(
+        "Network Error",
+        "Cannot reach the server. Please check your internet connection."
+      );
       return {
         success: false,
-        message: errorMessage,
+        message: "Network error",
       };
     }
   }
@@ -40,10 +49,23 @@ export function AuthProvider({ children }) {
       setUser({ email, token });
       return { success: true, data: response.data };
     } catch (error) {
-      const errorMessage =
-        error.response?.data.message || "An unexpected error occurred.";
-      showError("Registration Failed", errorMessage);
-      return { success: false, message: errorMessage };
+      if (error.response) {
+        showError(
+          "Register Failed",
+          error.response.data.message || "Server error"
+        );
+        return { success: false, message: error.response.data.message };
+      }
+
+      showError(
+        "Network Error",
+        "Cannot reach the server. Please check your internet connection."
+      );
+
+      return {
+        success: false,
+        message: "Network error",
+      };
     }
   }
 
