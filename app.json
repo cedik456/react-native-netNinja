@@ -4,7 +4,7 @@
     "name": "react-native-netNinja",
     "slug": "react-native-netNinja",
     "extra": {
-      "EXPO_PUBLIC_API_URL": "http://192.168.0.10:3000/api"
+      "EXPO_PUBLIC_API_URL": "http://192.168.1.8:3000/api"
     },
     "version": "1.0.0",
     "orientation": "portrait",

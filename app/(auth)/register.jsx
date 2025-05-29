@@ -9,6 +9,7 @@ import React, { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import Button from "../../components/Button";
 import { useAuth } from "../../hooks/useAuth";
+import { showError } from "../../utils/error";
 
 const Register = () => {
   const { register } = useAuth();
@@ -20,13 +21,24 @@ const Register = () => {
 
   const handleSubmit = async () => {
     try {
+      if (!name || !email || !password) {
+        showError("All fields are required.");
+        return;
+      }
+
+      const emailRegex = /\S+@\S+\.\S+/;
+      if (!emailRegex.test(email)) {
+        showError("Please enter a valid email address.");
+        return;
+      }
+
       const result = await register(name, email, password);
 
       if (result.success) {
         router.replace("/(dashboard)/profile");
       }
     } catch (error) {
-      console.log("Registration Failed: ", error.message);
+      showError("Registration failed", result.message);
     }
   };
 

@@ -1,5 +1,6 @@
-import api from "../lib/axiosInstance";
+import api from "../utils/axiosInstance";
 import { createContext, useState } from "react";
+import { showError } from "../utils/error";
 
 const AuthContext = createContext();
 
@@ -17,12 +18,21 @@ export function AuthProvider({ children }) {
       return { success: true };
     } catch (error) {
       if (error.response) {
-        console.error("Login Failed: ", error.response.data.message);
-      } else if (error.request) {
-        console.error("No response from server", error.request);
-      } else {
-        console.log("Error: ", error.message);
+        showError(
+          "Login Failed",
+          error.response.data.message || "Server error"
+        );
+        return { success: false, message: error.response.data.message };
       }
+
+      showError(
+        "Network Error",
+        "Cannot reach the server. Please check your internet connection."
+      );
+      return {
+        success: false,
+        message: "Network error",
+      };
     }
   }
 
@@ -40,16 +50,28 @@ export function AuthProvider({ children }) {
       return { success: true, data: response.data };
     } catch (error) {
       if (error.response) {
-        console.error("Registration Failed: ", error.response.data.message);
-      } else if (error.request) {
-        console.error("No response from server", error.request);
-      } else {
-        console.log("Error: ", error.message);
+        showError(
+          "Register Failed",
+          error.response.data.message || "Server error"
+        );
+        return { success: false, message: error.response.data.message };
       }
+
+      showError(
+        "Network Error",
+        "Cannot reach the server. Please check your internet connection."
+      );
+
+      return {
+        success: false,
+        message: "Network error",
+      };
     }
   }
 
-  async function logout() {}
+  async function logout() {
+    setUser(null);
+  }
 
   return (
     <AuthContext.Provider value={{ user, login, register, logout }}>

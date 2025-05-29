@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import "../global.css";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AuthProvider } from "../contexts/AuthContext";
+import Toast from "react-native-toast-message";
 
 const RootLayout = () => {
   const colorScheme = useColorScheme();
@@ -27,6 +28,7 @@ const RootLayout = () => {
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="(dashboard)" options={{ headerShown: false }} />
         </Stack>
+        <Toast />
       </SafeAreaView>
     </AuthProvider>
   );
