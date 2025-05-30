@@ -1,17 +1,11 @@
 import React from "react";
 import { useColorScheme } from "react-native";
-import { Ionicons, Feather, Fon } from "@expo/vector-icons";
-import { Redirect, Tabs } from "expo-router";
-import { useAuth } from "../../hooks/useAuth";
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
 
 const DashboardLayout = () => {
   const colorScheme = useColorScheme();
 
-  const { user } = useAuth();
-
-  if (!user) {
-    return <Redirect href="/login" />;
-  }
   return (
     <Tabs
       screenOptions={{
